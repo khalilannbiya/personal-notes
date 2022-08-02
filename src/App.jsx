@@ -1,7 +1,7 @@
 import "./App.css";
 import { getInitialData, showFormattedDate } from "./utils/index";
 import { useState } from "react";
-import { Navbar, NoteInput } from "./components/index ";
+import { Navbar, NoteInput, NotesList } from "./components/index ";
 
 function App() {
    const [notes, setNotes] = useState(getInitialData());
@@ -69,7 +69,10 @@ function App() {
          <Navbar searchInput={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
          <div className="note-app__body">
             <NoteInput handleSubmit={handleSubmit} limit={limit} inputTitle={inputTitle} handleChange={handleChange} inputBody={inputBody} onChange={(e) => setInputBody(e.target.value)} />
-            <h2>Catatan Aktif</h2>
+            <NotesList notes={notes} searchInput={searchInput} resultBySearch={resultBySearch} handleDelete={handleDelete} handleArsip={handleArsip} />
+
+            {/* <h2>Catatan Aktif</h2>
+
             {notes.length === 0 || notes.filter((value) => value.archived === false).length === 0 ? (
                <p>Tidak ada catatan</p>
             ) : (
@@ -122,7 +125,8 @@ function App() {
                           }
                        })}
                </div>
-            )}
+            )} */}
+
             <h2>Arsip</h2>
             {notes.length === 0 || notes.filter((value) => value.archived === true).length === 0 ? (
                <p>Tidak ada catatan</p>
