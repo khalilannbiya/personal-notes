@@ -1,7 +1,7 @@
 import "./App.css";
 import { getInitialData, showFormattedDate } from "./utils/index";
 import { useState } from "react";
-import { Navbar, FormCreateNote } from "./components/index ";
+import { Navbar, NoteInput } from "./components/index ";
 
 function App() {
    const [notes, setNotes] = useState(getInitialData());
@@ -68,16 +68,7 @@ function App() {
       <>
          <Navbar searchInput={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
          <div className="note-app__body">
-            <div className="note-input">
-               <h2>Buat Catatan</h2>
-               <FormCreateNote handleSubmit={handleSubmit} limit={limit} inputTitle={inputTitle} handleChange={handleChange} inputBody={inputBody} onChange={(e) => setInputBody(e.target.value)} />
-               {/* <form action="" onSubmit={handleSubmit}>
-                  <p className="note-input__title__char-limit">Sisa Karakter: {limit}</p>
-                  <input value={inputTitle} onChange={handleChange} type="text" className="note-input__title" placeholder="Ini adalah judul ...." required />
-                  <textarea className="note-input__body" value={inputBody} onChange={(e) => setInputBody(e.target.value)} type="text" placeholder="Tuliskan Catatanmu disini ...." required></textarea>
-                  <button type="submit">Buat</button>
-               </form> */}
-            </div>
+            <NoteInput handleSubmit={handleSubmit} limit={limit} inputTitle={inputTitle} handleChange={handleChange} inputBody={inputBody} onChange={(e) => setInputBody(e.target.value)} />
             <h2>Catatan Aktif</h2>
             {notes.length === 0 || notes.filter((value) => value.archived === false).length === 0 ? (
                <p>Tidak ada catatan</p>
