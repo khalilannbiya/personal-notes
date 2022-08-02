@@ -69,38 +69,10 @@ function App() {
          <Navbar searchInput={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
          <div className="note-app__body">
             <NoteInput handleSubmit={handleSubmit} limit={limit} inputTitle={inputTitle} handleChange={handleChange} inputBody={inputBody} onChange={(e) => setInputBody(e.target.value)} />
-            <NotesList notes={notes} searchInput={searchInput} resultBySearch={resultBySearch} handleDelete={handleDelete} handleArsip={handleArsip} />
 
-            <h2>Arsip</h2>
-            {notes.length === 0 || notes.filter((value) => value.archived === true).length === 0 ? (
-               <p>Tidak ada catatan</p>
-            ) : (
-               <div className="notes-list">
-                  {notes.map((note) => {
-                     {
-                        return (
-                           note.archived && (
-                              <div key={note.id} className="note-item">
-                                 <div className="note-item__content">
-                                    <h3 className="note-item__title">{note.title}</h3>
-                                    <p className="note-item__date">{showFormattedDate(note.createdAt)}</p>
-                                    <p className="note-item__body">{note.body}</p>
-                                 </div>
-                                 <div className="note-item__action">
-                                    <button onClick={() => handleDelete(note.id)} className="note-item__delete-button">
-                                       Delete
-                                    </button>
-                                    <button onClick={() => handleArsip(note.id)} className="note-item__archive-button">
-                                       {note.archived ? "Pindahkan" : "Arsipkan"}
-                                    </button>
-                                 </div>
-                              </div>
-                           )
-                        );
-                     }
-                  })}
-               </div>
-            )}
+            <NotesList notes={notes} searchInput={searchInput} resultBySearch={resultBySearch} handleDelete={handleDelete} handleArsip={handleArsip} headingTwo="Catatan Aktif" conditionArchived={false} />
+
+            <NotesList notes={notes} searchInput={searchInput} resultBySearch={resultBySearch} handleDelete={handleDelete} handleArsip={handleArsip} headingTwo="Arsip" conditionArchived={true} />
          </div>
       </>
    );
