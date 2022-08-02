@@ -1,7 +1,7 @@
 import "./App.css";
-import { getInitialData, showFormattedDate } from "./utils/index";
+import { getInitialData } from "./utils/index";
 import { useState } from "react";
-import { Navbar, NoteInput, NotesList } from "./components/index ";
+import { Navbar, NoteInput, NotesList, NoteBody } from "./components/index ";
 
 function App() {
    const [notes, setNotes] = useState(getInitialData());
@@ -67,13 +67,27 @@ function App() {
    return (
       <>
          <Navbar searchInput={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
-         <div className="note-app__body">
+
+         <NoteBody
+            handleSubmit={handleSubmit}
+            limit={limit}
+            inputTitle={inputTitle}
+            handleChange={handleChange}
+            inputBody={inputBody}
+            onChange={(e) => setInputBody(e.target.value)}
+            notes={notes}
+            searchInput={searchInput}
+            resultBySearch={resultBySearch}
+            handleDelete={handleDelete}
+            handleArsip={handleArsip}
+         />
+         {/* <div className="note-app__body">
             <NoteInput handleSubmit={handleSubmit} limit={limit} inputTitle={inputTitle} handleChange={handleChange} inputBody={inputBody} onChange={(e) => setInputBody(e.target.value)} />
 
             <NotesList notes={notes} searchInput={searchInput} resultBySearch={resultBySearch} handleDelete={handleDelete} handleArsip={handleArsip} headingTwo="Catatan Aktif" conditionArchived={false} />
 
             <NotesList notes={notes} searchInput={searchInput} resultBySearch={resultBySearch} handleDelete={handleDelete} handleArsip={handleArsip} headingTwo="Arsip" conditionArchived={true} />
-         </div>
+         </div> */}
       </>
    );
 }
