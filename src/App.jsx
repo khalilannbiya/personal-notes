@@ -1,6 +1,7 @@
 import "./App.css";
-import { getInitialData, showFormattedDate } from "./utils/index";
+import { getInitialData } from "./utils/index";
 import { useState } from "react";
+import { Navbar, NoteBody } from "./components/index ";
 
 function App() {
    const [notes, setNotes] = useState(getInitialData());
@@ -65,107 +66,21 @@ function App() {
 
    return (
       <>
-         <nav className="note-app__header">
-            <h1>Khalil's Notes</h1>
-            <div className="note-search">
-               <input value={searchInput} onChange={(e) => setSearchInput(e.target.value)} type="text" placeholder="Cari catatan..." />
-            </div>
-         </nav>
-         <div className="note-app__body">
-            <div className="note-input">
-               <h2>Buat Catatan</h2>
-               <form action="" onSubmit={handleSubmit}>
-                  <p className="note-input__title__char-limit">Sisa Karakter: {limit}</p>
-                  <input value={inputTitle} onChange={handleChange} type="text" className="note-input__title" placeholder="Ini adalah judul ...." required />
-                  <textarea className="note-input__body" value={inputBody} onChange={(e) => setInputBody(e.target.value)} type="text" placeholder="Tuliskan Catatanmu disini ...." required></textarea>
-                  <button type="submit">Buat</button>
-               </form>
-            </div>
-            <h2>Catatan Aktif</h2>
-            {notes.length === 0 || notes.filter((value) => value.archived === false).length === 0 ? (
-               <p>Tidak ada catatan</p>
-            ) : (
-               <div className="notes-list">
-                  {searchInput.length === 0
-                     ? notes.map((note) => {
-                          {
-                             return (
-                                !note.archived && (
-                                   <div key={note.id} className="note-item">
-                                      <div className="note-item__content">
-                                         <h3 className="note-item__title">{note.title}</h3>
-                                         <p className="note-item__date">{showFormattedDate(note.createdAt)}</p>
-                                         <p className="note-item__body">{note.body}</p>
-                                      </div>
-                                      <div className="note-item__action">
-                                         <button onClick={() => handleDelete(note.id)} className="note-item__delete-button">
-                                            Delete
-                                         </button>
-                                         <button onClick={() => handleArsip(note.id)} className="note-item__archive-button">
-                                            {note.archived ? "Pindahkan" : "Arsipkan"}
-                                         </button>
-                                      </div>
-                                   </div>
-                                )
-                             );
-                          }
-                       })
-                     : resultBySearch.map((note) => {
-                          {
-                             return (
-                                !note.archived && (
-                                   <div key={note.id} className="note-item">
-                                      <div className="note-item__content">
-                                         <h3 className="note-item__title">{note.title}</h3>
-                                         <p className="note-item__date">{showFormattedDate(note.createdAt)}</p>
-                                         <p className="note-item__body">{note.body}</p>
-                                      </div>
-                                      <div className="note-item__action">
-                                         <button onClick={() => handleDelete(note.id)} className="note-item__delete-button">
-                                            Delete
-                                         </button>
-                                         <button onClick={() => handleArsip(note.id)} className="note-item__archive-button">
-                                            {note.archived ? "Pindahkan" : "Arsipkan"}
-                                         </button>
-                                      </div>
-                                   </div>
-                                )
-                             );
-                          }
-                       })}
-               </div>
-            )}
-            <h2>Arsip</h2>
-            {notes.length === 0 || notes.filter((value) => value.archived === true).length === 0 ? (
-               <p>Tidak ada catatan</p>
-            ) : (
-               <div className="notes-list">
-                  {notes.map((note) => {
-                     {
-                        return (
-                           note.archived && (
-                              <div key={note.id} className="note-item">
-                                 <div className="note-item__content">
-                                    <h3 className="note-item__title">{note.title}</h3>
-                                    <p className="note-item__date">{showFormattedDate(note.createdAt)}</p>
-                                    <p className="note-item__body">{note.body}</p>
-                                 </div>
-                                 <div className="note-item__action">
-                                    <button onClick={() => handleDelete(note.id)} className="note-item__delete-button">
-                                       Delete
-                                    </button>
-                                    <button onClick={() => handleArsip(note.id)} className="note-item__archive-button">
-                                       {note.archived ? "Pindahkan" : "Arsipkan"}
-                                    </button>
-                                 </div>
-                              </div>
-                           )
-                        );
-                     }
-                  })}
-               </div>
-            )}
-         </div>
+         <Navbar searchInput={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
+
+         <NoteBody
+            handleSubmit={handleSubmit}
+            limit={limit}
+            inputTitle={inputTitle}
+            handleChange={handleChange}
+            inputBody={inputBody}
+            onChange={(e) => setInputBody(e.target.value)}
+            notes={notes}
+            searchInput={searchInput}
+            resultBySearch={resultBySearch}
+            handleDelete={handleDelete}
+            handleArsip={handleArsip}
+         />
       </>
    );
 }
