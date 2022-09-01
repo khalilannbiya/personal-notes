@@ -1,4 +1,4 @@
-# Perconal Notes
+# Personal Notes
 
 Project Personal Notes App with React | Dicoding
 ## Demo
