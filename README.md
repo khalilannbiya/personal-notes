@@ -1,4 +1,4 @@
-# Bookshelf App
+# Perconal Notes
 
 Project Personal Notes App with React | Dicoding
 ## Demo
@@ -17,13 +17,13 @@ Project Personal Notes App with React | Dicoding
 Clone the project
 
 ```bash
-  git clone https://github.com/khalilannbiya/bookshelf-app.git
+  git clone https://github.com/khalilannbiya/personal-notes.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd bookshelf-app
+  cd personal-notes
 ```
 
 Install Package with yarn
